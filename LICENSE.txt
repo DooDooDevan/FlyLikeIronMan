@@ -1,0 +1,16 @@
+Fly Like Iron Man - by DooDooDevan
+
+Licence of the mod's own files (app\*.py, app\sounds, app\data, GAMEDATA\MODS\FlyLikeIronMan):
+
+  - Free to use, for anyone.
+  - Credit required: if you share it, show it, or use any of it in your own work (mods, videos,
+    modpacks), credit "Fly Like Iron Man by DooDooDevan".
+  - No sale: you may not sell it, any part of it, or anything made from it, or put it behind a
+    paywall.
+  - Changed versions must keep this credit and these same terms.
+
+The closest standard licence is Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0):
+https://creativecommons.org/licenses/by-nc/4.0/
+
+The bundled third-party software (runtime\) keeps its own licences: see LICENSES\ and CREDITS.txt.
+No Man's Sky (c) Hello Games. Not made by or affiliated with Hello Games, Marvel or Disney.

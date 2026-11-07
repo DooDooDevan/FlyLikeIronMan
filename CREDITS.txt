@@ -1,0 +1,40 @@
+FLY LIKE IRON MAN - CREDITS AND LICENCES
+
+Mod: Fly Like Iron Man, by DooDooDevan.
+
+Licence of the mod's own files (app\*.py, app\sounds, app\data, GAMEDATA\MODS\FlyLikeIronMan),
+in plain words:
+  - Free to use, for anyone.
+  - Credit required: if you share it, show it, or use any of it in your own work (mods, videos,
+    modpacks), credit "Fly Like Iron Man by DooDooDevan".
+  - No sale: you may not sell it, any part of it, or anything made from it, or put it behind a
+    paywall.
+  - Changed versions must keep this credit and these same terms.
+  The closest standard licence is Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0):
+  https://creativecommons.org/licenses/by-nc/4.0/
+  The bundled third-party software below keeps its own licences.
+
+Built with (bundled in runtime\, unmodified except NMS.py's
+pymhf.toml, where its debug window is switched off; full licence texts in LICENSES\):
+- NMS.py (NMSpy) by monkeyman192 and contributors - MIT licence
+    https://github.com/monkeyman192/NMS.py
+- pyMHF (python Modding Hooking Framework) by monkeyman192 - MIT licence
+- pyrun_injected, cyminhook (MinHook bindings) - MIT licence
+- Pymem - MIT; NumPy - BSD-3-Clause; Pillow - MIT-CMU (HPND); mss - MIT;
+  iced-x86 - MIT; psutil - BSD-3-Clause; pywin32 - PSF;
+  (see LICENSES\THIRD_PARTY_NOTICES.txt for the complete list with versions)
+- Python 3.13.17 embeddable package (python.org) - PSF License
+- Tcl/Tk 8.6 and tkinter (python.org's Python for Windows; Suit Control's window) - Tcl/Tk licence (BSD-style), PSF License
+
+Game files:
+- GAMEDATA\MODS\FlyLikeIronMan contains files derived from No Man's Sky game
+  data (an edited PLAYERCHARACTER.SCENE.MBIN and jetpack animations), and
+  app\data\0H_JPACK_UP.ANIM.MBIN is the game's own hover animation, unchanged
+  (the mod recognises it in memory). They were extracted and compiled with
+  MBINCompiler (monkeyman192, MIT) and are distributed the way NMS mods
+  usually are. No Man's Sky (c) Hello Games. This mod is not made by or
+  affiliated with Hello Games, Marvel or Disney; "Iron Man" is only used to
+  describe the flying style.
+
+Sounds: every sound in app\sounds was generated for this mod (gen_*.py scripts in the
+developer's folder); none come from other sources.

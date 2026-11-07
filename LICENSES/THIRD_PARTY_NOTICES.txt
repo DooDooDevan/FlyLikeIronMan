@@ -1,0 +1,28 @@
+Third-party software bundled in runtime\python (all permissive licences).
+
+- cyminhook 0.1.6: MIT
+- iced-x86 1.21.0: MIT License
+- keyboard 0.13.5: MIT License
+- mss 10.2.0: MIT License
+- NMSpy 183877.0: MIT
+- numpy 2.5.4: BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0
+- packaging 26.3: Apache-2.0 OR BSD-2-Clause
+- pefile 2024.8.26: MIT
+- pillow 13.0.0: MIT-CMU
+- prompt_toolkit 3.0.53: BSD License
+- psutil 5.9.8: BSD License
+- Pymem 1.14.0: MIT License
+- pyMHF 0.2.5: MIT
+- PyMonCtl 0.92: BSD License
+- pyrun_injected 0.2.1: MIT
+- pywin32 312: Python Software Foundation License
+- PyWinBox 0.7: BSD License
+- PyWinCtl 0.4.1: BSD License
+- questionary 2.1.1: MIT License
+- regex 2024.9.11: Apache Software License
+- tomlkit 0.15.2: MIT
+- typing_extensions 4.16.0: PSF-2.0
+- wcwidth 0.9.4: MIT License
+
+- Python 3.13.17 (embeddable, python.org): PSF License (Python-LICENSE.txt)
+- Tcl/Tk 8.6.15 and tkinter (from python.org's Python 3.13 for Windows; Suit Control's window): Tcl/Tk licence, BSD-style (Tcl-Tk-LICENSE.txt); tkinter: PSF License

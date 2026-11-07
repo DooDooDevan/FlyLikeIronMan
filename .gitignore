@@ -1,0 +1,17 @@
+# written while the mod runs
+settings.ini
+settings.panel-session.ini
+panel.json
+app/config.json
+app/*.log
+app/flight_out*.txt
+app/limbjets_log*.txt
+app/panel_log.txt
+app/setup_log.txt
+app/report.txt
+app/*.flag
+app/*.pkl
+app/*.bak
+app/nmspy_state/
+__pycache__/
+*.pyc
