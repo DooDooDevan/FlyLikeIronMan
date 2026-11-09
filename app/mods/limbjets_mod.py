@@ -63,19 +63,19 @@ class LimbJets(Mod):
                 core.on_reload(self.st)
             except Exception:
                 log.exception("reloading limbjets_core failed")
-    @manual_hook("RefreshJetpackEffect", offset=0x1157BC0, func_def=FUNCDEF(restype=None, argtypes=[c_uint64]),
+    @manual_hook("RefreshJetpackEffect", offset=0x1156F10, func_def=FUNCDEF(restype=None, argtypes=[c_uint64]),
                  detour_time="before")
     def refresh_before(self, this):
         self._call("refresh_before", this)
-    @manual_hook("RefreshJetpackEffect", offset=0x1157BC0, func_def=FUNCDEF(restype=None, argtypes=[c_uint64]),
+    @manual_hook("RefreshJetpackEffect", offset=0x1156F10, func_def=FUNCDEF(restype=None, argtypes=[c_uint64]),
                  detour_time="after")
     def refresh_after(self, this):
         self._call("refresh_after", this)
-    @manual_hook("QuickMenuAddAction", offset=0x156EEC0,
+    @manual_hook("QuickMenuAddAction", offset=0x156F300,
                  func_def=FUNCDEF(restype=c_uint64, argtypes=[c_uint64, c_uint64]), detour_time="after")
     def qmenu_add_after(self, actions, action):
         self._call("qmenu_add_after", actions, action)
-    @manual_hook("JetLocatorBuilder", offset=0x1157F10,
+    @manual_hook("JetLocatorBuilder", offset=0x1157260,
                  func_def=FUNCDEF(restype=c_bool, argtypes=[c_uint64, c_uint32]), detour_time="before")
     def builder_before(self, cap, node):
         self._call("builder_before", cap, node)

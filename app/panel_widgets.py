@@ -2315,7 +2315,7 @@ def _gallery(root):
     made["controls"]._focus = made["controls"]._ring = True
     made["about"].set_disabled(True)
     b = card(0, "status lights")
-    Light(b, "game running", "ok", "Build 184271 // supported", width=px(260)).pack(anchor="w")
+    Light(b, "game running", "ok", "Build 185034 // supported", width=px(260)).pack(anchor="w")
     Light(b, "game link (mod)", "warn", "Paused: the game is in a menu", width=px(260)).pack(anchor="w")
     Light(b, "mods enabled", "bad", "Turn mods back on: click to fix", width=px(260), command=lambda: None).pack(
         anchor="w")

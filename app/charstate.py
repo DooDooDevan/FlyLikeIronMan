@@ -47,7 +47,7 @@ def read(addr):
         return struct.unpack("<i", pm.read_bytes(addr, 4))[0]
     except Exception:
         return None
-DATA_PTR, SPAWN_STATE = 0x6F6B208, 0xE70 + 0xD5070 + 0xD0
+DATA_PTR, SPAWN_STATE = 0x6F6C288, 0xE70 + 0xD5070 + 0xD0
 VEHICLE_MODES = {1: "ship", 6: "ship", 7: "exocraft"}
 ON_FOOT_MODES = {0, 8, 9}
 _mode_trusted = [None]

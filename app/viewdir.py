@@ -1,12 +1,12 @@
 import ctypes
 import math
 import struct
-DATA_PTR = 0x6F6B208
+DATA_PTR = 0x6F6C288
 MGR_OFF = 0x92CD50
-MGR_VTABLE = 0x4B18400
+MGR_VTABLE = 0x4B19AD0
 CAM_MAT = 0x130
 PLAYER_OFF = 0x72CDE0
-PLAYER_VTABLE = 0x4B192D8
+PLAYER_VTABLE = 0x4B1A9A8
 def _parse(raw):
     f = struct.unpack("<16f", raw)
     r, u, b, p = f[0:3], f[4:7], f[8:11], f[12:15]

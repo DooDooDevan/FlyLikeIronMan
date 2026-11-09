@@ -1092,7 +1092,7 @@ class DemoWorld(World):
         return dict(t=time.perf_counter(), nms_pid=0 if s == "nogame" else 4242, nms_hwnd=0, game_fg=False,
                     fg_hwnd=0, fg_pid=0, script=s not in ("nogame", "offline"),
                     mod="off" if s == "nogame" else "live", mod_age=0.02, mods_disabled=False, mods_known=True,
-                    build="26385139", pads=[0])
+                    build="26540391", pads=[0])
     def status(self, client):
         if self.scenario == "nogame":
             return control.parse_status(bytes(control.STS_SIZE))

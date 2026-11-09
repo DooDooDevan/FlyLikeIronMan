@@ -1,5 +1,35 @@
 import os
 import sys
+import time
+class _Tee:
+    def __init__(self, stream, path):
+        self._s = stream
+        try:
+            self._f = open(path, "w", encoding="utf-8", errors="replace", buffering=1)
+        except OSError:
+            self._f = None
+    def write(self, t):
+        try:
+            self._s.write(t)
+        except Exception:
+            pass
+        if self._f is not None:
+            try:
+                self._f.write(t)
+            except OSError:
+                self._f = None
+        return len(t)
+    def flush(self):
+        for s in (self._s, self._f):
+            try:
+                s and s.flush()
+            except Exception:
+                pass
+    def __getattr__(self, name):
+        return getattr(self._s, name)
+sys.stdout = sys.stderr = _Tee(sys.__stdout__,
+                               os.path.join(os.path.dirname(os.path.abspath(__file__)), "nmspy_out.txt"))
+print(time.strftime("NMS.py start %Y-%m-%d %H:%M:%S"))
 import questionary
 for name in ("confirm", "text", "path", "select", "checkbox"):
     setattr(questionary, name, lambda *a, **k: None)
@@ -40,6 +70,15 @@ try:
     _dllinject.StringType = _as_text
 except Exception as e:
     print(f"(couldn't adjust the injector: {e})")
+try:
+    import pymem as _pymem
+    _read_bool = _pymem.Pymem.read_bool
+    def _read_bool_nap(self, addr):
+        time.sleep(0.05)
+        return _read_bool(self, addr)
+    _pymem.Pymem.read_bool = _read_bool_nap
+except Exception as e:
+    print(f"(couldn't slow the start-up wait: {e})")
 state_dir = os.path.join(HERE, "nmspy_state")
 os.makedirs(state_dir, exist_ok=True)
 run_module(pkg, cfg, "nmspy", state_dir)

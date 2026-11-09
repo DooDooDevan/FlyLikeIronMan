@@ -110,11 +110,11 @@ def _rotate_log():
         for h in hs:
             h.release()
 _rotate_log()
-RVA_REFRESH = 0x1157BC0
-RVA_LAMBDA = 0x1157F10
-RVA_FIND_BY_HASH = 0x2C4F870
-RVA_FIND_BY_NAME = 0x2C4F940
-RVA_GET_NAME = 0x1889770
+RVA_REFRESH = 0x1156F10
+RVA_LAMBDA = 0x1157260
+RVA_FIND_BY_HASH = 0x2C4FE50
+RVA_FIND_BY_NAME = 0x2C4FF20
+RVA_GET_NAME = 0x1889700
 TYPE_JOINT, TYPE_LOCATOR = 4, 9
 LIMBS = [("HandFX_L", "player01_l_arm_WristSHJnt"), ("HandFX_R", "player01_r_arm_WristSHJnt"),
          ("FootFX_L", "player01_l_leg_KneeSHJnt"), ("FootFX_R", "player01_r_leg_KneeSHJnt")]
@@ -127,8 +127,8 @@ _find_name = CFUNCTYPE(c_void_p, POINTER(c_uint32), c_uint32, ctypes.c_char_p, c
 _get_name = CFUNCTYPE(ctypes.c_char_p, c_uint32)(BASE + RVA_GET_NAME)
 _lambda = CFUNCTYPE(c_bool, c_void_p, c_uint32)(BASE + RVA_LAMBDA)
 _refresh = CFUNCTYPE(None, c_void_p)(BASE + RVA_REFRESH)
-RVA_TRANSLATE = 0x2C45990
-RVA_LANGUAGE = 0x6EF1CA0
+RVA_TRANSLATE = 0x2C45F70
+RVA_LANGUAGE = 0x6EF2CF0
 NAME_IDS = (b"BOLT_NAME_L", b"BOLTSHOTGUN_NAME_L", b"BOLTSMG_NAME_L", b"RAILGUN1_NAME_L", b"CANNON_NAME_L",
             b"LASER_NAME_L", b"FLAMETHROW_NAME_L")
 _translate = CFUNCTYPE(c_uint64, c_uint64, ctypes.c_char_p, c_void_p)(BASE + RVA_TRANSLATE)
@@ -526,9 +526,9 @@ SPLASH_MIN_SPEED = 4.0
 SPLASH_UP = 1.3
 SPLASH_LINGER = 0.3
 _PM_OFF = 0x4DED20
-_pm_add = CFUNCTYPE(c_uint64, c_void_p, c_void_p, c_void_p, c_void_p)(BASE + 0x2217D0)
-_pm_retire = CFUNCTYPE(c_bool, c_void_p, c_void_p)(BASE + 0x141BA30)
-_node_world = CFUNCTYPE(None, c_uint32, c_void_p)(BASE + 0x2C52DE0)
+_pm_add = CFUNCTYPE(c_uint64, c_void_p, c_void_p, c_void_p, c_void_p)(BASE + 0x221770)
+_pm_retire = CFUNCTYPE(c_bool, c_void_p, c_void_p)(BASE + 0x141BE20)
+_node_world = CFUNCTYPE(None, c_uint32, c_void_p)(BASE + 0x2C533C0)
 def _splash_mat(st, pos, up, scale=1.0):
     buf = getattr(st, "splash_buf", None)
     if buf is None:
@@ -1342,7 +1342,7 @@ SHOULDERS = [("HandFX_L", "player01_l_arm_WristSHJnt"),
              ("HandFX_R", "player01_r_arm_WristSHJnt")]
 SHOULDER_JOINTS = ("player01_l_arm_ShoulderSHJnt", "player01_r_arm_ShoulderSHJnt")
 SHOULDER_FX = b"FUSION"
-THRUSTERS = 0x6F6B208
+THRUSTERS = 0x6F6C288
 ROLL_FX = (None, None, b"PLASMA")
 def _thruster(name):
     try:
@@ -1508,7 +1508,7 @@ ROLL_TARGET_RATE = 360.0
 PATH_ELEV_MAX = 85.0
 PATH_ELEV_RATE = 240.0
 LEAN_HARD_MAX = 88.0
-NODE_MGR = 0x6EFD7E8
+NODE_MGR = 0x6EFE830
 k32.ReadProcessMemory.argtypes = [c_void_p, c_void_p, c_void_p, ctypes.c_size_t, POINTER(ctypes.c_size_t)]
 k32.ReadProcessMemory.restype = c_bool
 k32.GetCurrentProcess.restype = c_void_p
@@ -2310,7 +2310,7 @@ def _body_up(player):
     return _space_up() or _norm(_v(player + 0x320))[0]
 def _finite(v):
     return all(math.isfinite(x) for x in v)
-_set_local = CFUNCTYPE(None, c_uint32, c_void_p)(BASE + 0x1880570)
+_set_local = CFUNCTYPE(None, c_uint32, c_void_p)(BASE + 0x18804C0)
 WATER_STATES = (12, 13)
 WATER_RECENT = 3.0
 WATER_NEAR = 3000.0
@@ -2361,9 +2361,9 @@ def _horiz(v, up):
     return _norm(_add(v, _scale(up, -_dot(v, up))))
 def _signed_yaw(a, b, up):
     return math.atan2(_dot(_cross(a, b), up), _dot(a, b))
-CAM_DATA = 0x6F6B208
+CAM_DATA = 0x6F6C288
 CAM_MGR = 0x92CD50
-CAM_MGR_VTABLE = 0x4B18400
+CAM_MGR_VTABLE = 0x4B19AD0
 CAM_MAT = 0x130
 _mbuf = (ctypes.c_float * 16)()
 _pbuf = c_uint64()
@@ -3805,7 +3805,7 @@ def _quarter_arms(st, dt):
     st.qx_w = min(1.0, max(0.0, x_))
     return st.qa_w * st.qx_w
 QUARTER_WRIST_FREE = True
-NODE_TABLE = 0x6EFD7E8
+NODE_TABLE = 0x6EFE830
 _anim_vcall = CFUNCTYPE(c_uint64, c_uint64)
 def _joint_anim_flag(h):
     try:
@@ -3974,7 +3974,7 @@ CROSS_CLOSE_EASE = 1.5
 CROSS_CLOSE_WAIT = 0.4
 CROSS_SMOOTH = (0.15, 0.15)
 CROSS_SMOOTH_FOR = 2.5
-_CLOSE_RVA = 0x5042040 + 0x5060
+_CLOSE_RVA = 0x5043150 + 0x5060
 CROSS_HOOK = "graphics"
 CROSS_MAX = 2.5
 CROSS_LEVEL = 0.5
@@ -4013,10 +4013,10 @@ def _frame_follow(A, B, k):
     ax = [(m[2][1] - m[1][2]) / s_, (m[0][2] - m[2][0]) / s_, (m[1][0] - m[0][1]) / s_]
     c, sn = math.cos(w * k), math.sin(w * k)
     return [_rot(r, ax, c, sn) for r in A]
-RVA_QA_TRIGGER = 0x1561DE0
-RVA_MENU_ACTION = 0x1468DC0
+RVA_QA_TRIGGER = 0x1562220
+RVA_MENU_ACTION = 0x1469150
 QA_MENU = 0x86FCA0
-QA_VTABLE = 0x4B1BAF0
+QA_VTABLE = 0x4B1D1C0
 QA_RECOVERY_SHIP, QA_SUMMON_NEXUS = 5, 3
 _qa_trigger = CFUNCTYPE(c_bool, c_void_p, c_void_p, c_bool)(BASE + RVA_QA_TRIGGER)
 _menu_action = CFUNCTYPE(None, c_void_p, ctypes.c_int32, c_uint32, c_bool, c_bool)(BASE + RVA_MENU_ACTION)
@@ -4044,19 +4044,19 @@ def quick_action_live(action, as_menu=True):
         if ctypes.c_int32.from_address(e_ + 4).value == action:
             return bool(_qa_trigger(inst, e_, bool(as_menu)))
     return None
-RVA_SET_TO_POSITION = 0x1495960
-_TP_REGION = CFUNCTYPE(c_uint64, c_void_p, c_uint64)(BASE + 0x2D5C660)
-_TP_REGION_DEF = CFUNCTYPE(c_uint64)(BASE + 0x2D5C690)
-_TP_TO_LOCAL = CFUNCTYPE(None, c_void_p, c_void_p, c_uint64)(BASE + 0x2D5BC70)
-_TP_PLAYER_POS = CFUNCTYPE(None, c_void_p, c_void_p)(BASE + 0x14B34D0)
-_TP_BODY_POS = CFUNCTYPE(None, c_void_p, c_void_p, c_uint32)(BASE + 0x2D18670)
-_TP_BODY_VEL = CFUNCTYPE(None, c_void_p, c_void_p)(BASE + 0x29A120)
-_TP_BODY_RB = CFUNCTYPE(c_uint64, c_void_p)(BASE + 0x2D13FD0)
-_TP_RB_VEL = CFUNCTYPE(None, c_void_p, c_void_p, c_uint32)(BASE + 0x2D39F90)
-_TP_FACE = CFUNCTYPE(None, c_void_p, c_void_p)(BASE + 0x2B24B0)
-_TP_AFTER = CFUNCTYPE(None, c_void_p, c_float)(BASE + 0x154D900)
-_TP_CTRL_TM = CFUNCTYPE(None, c_void_p, c_void_p)(BASE + 0x5754B0)
-TP_REGION_GLOBAL = 0x5370200
+RVA_SET_TO_POSITION = 0x1495CF0
+_TP_REGION = CFUNCTYPE(c_uint64, c_void_p, c_uint64)(BASE + 0x2D5CA60)
+_TP_REGION_DEF = CFUNCTYPE(c_uint64)(BASE + 0x2D5CA90)
+_TP_TO_LOCAL = CFUNCTYPE(None, c_void_p, c_void_p, c_uint64)(BASE + 0x2D5C070)
+_TP_PLAYER_POS = CFUNCTYPE(None, c_void_p, c_void_p)(BASE + 0x14B3860)
+_TP_BODY_POS = CFUNCTYPE(None, c_void_p, c_void_p, c_uint32)(BASE + 0x2D18EA0)
+_TP_BODY_VEL = CFUNCTYPE(None, c_void_p, c_void_p)(BASE + 0x29A0C0)
+_TP_BODY_RB = CFUNCTYPE(c_uint64, c_void_p)(BASE + 0x2D144D0)
+_TP_RB_VEL = CFUNCTYPE(None, c_void_p, c_void_p, c_uint32)(BASE + 0x2D3A2C0)
+_TP_FACE = CFUNCTYPE(None, c_void_p, c_void_p)(BASE + 0x2B2450)
+_TP_AFTER = CFUNCTYPE(None, c_void_p, c_float)(BASE + 0x154DD30)
+_TP_CTRL_TM = CFUNCTYPE(None, c_void_p, c_void_p)(BASE + 0x575AD0)
+TP_REGION_GLOBAL = 0x5371260
 TP_DATA_REGION = 0x72D088
 def _aligned(n, vals=None):
     buf = ctypes.create_string_buffer(n + 16)
@@ -4243,7 +4243,7 @@ def _qmenu_entries(inst, depth=0):
     return cap, n_, c_uint64.from_address(inst + QA_TABLE + 16 + 16 * depth).value
 QMENU_EXTRA = ((QA_SUMMON_NEXUS, 0xA098), (QA_GALAXY_MAP, 0xA0D8))
 QA_PHOTO_MODE = 0x15
-RVA_CAN_SUMMON_NEXUS = 0x167F0B0
+RVA_CAN_SUMMON_NEXUS = 0x167F020
 _can_summon_nexus = CFUNCTYPE(c_bool, c_void_p, c_uint32)(BASE + RVA_CAN_SUMMON_NEXUS)
 def qmenu_add_after(st, actions, action):
     data_ = c_uint64.from_address(BASE + CAM_DATA).value

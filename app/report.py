@@ -94,9 +94,25 @@ def main():
     out += section("Flight script (flight_out.txt, last run, key lines)",
                    ([l for l in fl if FLIGHT_KEY.search(l)][-60:] or fl[-30:]) if fl else ["(no flight_out.txt yet)"])
     out += section("Setup (setup_log.txt, last lines)", tail(HERE / "setup_log.txt", 30) or ["(no setup_log.txt yet)"])
-    crash = tail(HERE / "CRITICAL_ERROR.txt", 25)
-    if crash:
-        out += section("NMS.py crash note (CRITICAL_ERROR.txt)", crash)
+    out += section("NMS.py window (nmspy_out.txt, last lines)",
+                   tail(HERE / "nmspy_out.txt", 25) or ["(no nmspy_out.txt yet)"])
+    plog = None
+    try:
+        import flim_paths
+        gd_ = flim_paths.game_dir()
+        if gd_:
+            logs = sorted((Path(gd_) / "Binaries" / "logs").glob("pymhf-*.log"), key=lambda p: p.stat().st_mtime)
+            plog = logs[-1] if logs else None
+    except Exception:
+        pass
+    out += section(f"In-game Python ({plog.name if plog else 'pymhf log'}, newest, last lines)",
+                   (tail(plog, 25) if plog else None) or ["(no pymhf log in the game's Binaries\\logs: the in-game "
+                                                          "Python never started)"])
+    pkg_crash = HERE.parent / "runtime" / "python" / "Lib" / "site-packages" / "pymhf" / "CRITICAL_ERROR.txt"
+    for crash_f in (HERE / "CRITICAL_ERROR.txt", pkg_crash, Path.home() / "CRITICAL_ERROR.txt"):
+        crash = tail(crash_f, 25)
+        if crash:
+            out += section(f"NMS.py crash note ({crash_f.name}, {crash_f.parent.name})", crash)
     text = scrub("\n".join(out))
     print(text)
     try:

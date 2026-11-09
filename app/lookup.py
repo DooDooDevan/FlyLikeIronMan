@@ -2,17 +2,18 @@ import re
 import struct
 import time
 import viewdir
-VT = {"cGcPlayer": 0x4B192D8, "cGcPlayerWeapon": 0x4B19388, "cGcPlayerCharacterComponent": 0x4B98C90,
-      "cTkCharacterRigidBody": 0x35DDE20, "cTkHavokCharacterController": 0x35DCF80}
+VT = {"cGcPlayer": 0x4B1A9A8, "cGcPlayerWeapon": 0x4B1AA58, "cGcPlayerCharacterComponent": 0x4B9A4D8,
+      "cTkCharacterRigidBody": 0x35DEEC0, "cTkHavokCharacterController": 0x35DE020}
+CTRL_RB, RB_CRB = 0xC0, 0x320
 PLAYER_CTRL, CTRL_BODY = 0x160, 0x200
 BODY_HAVOK, HAVOK_VEL = 0x90, 0x60
 PLAYER_WEAPON = 0x3E0
 PLAYER_COMP = 0x5610
-RES_MGR = 0x6EFD7E0
+RES_MGR = 0x6EFE870
 RES_COUNT, RES_LIST = 0x5C, 0x60
 RES_TYPE, RES_NAME = 0x8, 0xC
 ANIM_TYPE, ANIM_CLIP = 3, 0x1D0
-GFX_SETTINGS = 0x6EF1A40
+GFX_SETTINGS = 0x6EF2A90
 MINING_SLOT = 0x1120
 BSTRIDE, BID, PSTRIDE = 0x130, 0x80, 0x1B0
 PROJ_AFTER = 0x4000
@@ -44,11 +45,21 @@ def body(pm):
     p = player(pm)
     try:
         ctrl = _u64(pm, p + PLAYER_CTRL) if p else 0
-        b = ctrl + CTRL_BODY
-        if ctrl and is_a(pm, ctrl, "cTkHavokCharacterController") and is_a(pm, b, "cTkCharacterRigidBody"):
-            hv = _u64(pm, b + BODY_HAVOK)
-            if hv:
-                return b, hv + HAVOK_VEL
+        if not (ctrl and is_a(pm, ctrl, "cTkHavokCharacterController")):
+            return None, None
+        cands = []
+        try:
+            rb = _u64(pm, ctrl + CTRL_RB)
+            if rb:
+                cands.append(_u64(pm, rb + RB_CRB))
+        except Exception:
+            pass
+        cands.append(ctrl + CTRL_BODY)
+        for b in cands:
+            if b and is_a(pm, b, "cTkCharacterRigidBody"):
+                hv = _u64(pm, b + BODY_HAVOK)
+                if hv:
+                    return b, hv + HAVOK_VEL
     except Exception:
         pass
     return None, None

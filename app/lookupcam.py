@@ -1,5 +1,5 @@
 import struct
-G = 0x5042040
+G = 0x5043150
 CLOSE_DIST = G + 0x5060
 CLOSE_X = G + 0x5064
 SHIPPED = {CLOSE_DIST: 0.5, CLOSE_X: 0.5}
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     import pymem.process
     pm = pymem.Pymem("NMS.exe")
     base = pymem.process.module_from_name(pm.process_handle, "NMS.exe").lpBaseOfDll
-    side = -1.0 if pm.read_float(base + 0x50452EC) < 0 else 1.0
+    side = -1.0 if pm.read_float(base + 0x50463FC) < 0 else 1.0
     show = lambda t: print(t, [round(pm.read_float(base + r), 3) for r in (CLOSE_DIST, CLOSE_X)])
     show("before ")
     print("apply ->", apply(pm, base, side))

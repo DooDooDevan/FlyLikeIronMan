@@ -1,6 +1,6 @@
 FLY LIKE IRON MAN  -  a No Man's Sky mod by DooDooDevan
 =======================================================
-Version 1.0.0 for No Man's Sky build 184271 (Windows, Steam)
+Version 1.0.1 for No Man's Sky build 185034 (Windows, Steam)
 
 Free flight where you look, flames from both hands and both feet, an Iron Man
 pose that leans with your speed, an afterburner, sonic booms, an interplanetary
@@ -11,7 +11,7 @@ Anomaly, and under water.
 NEEDS
 -----
 - Windows 10 or 11, 64-bit.
-- No Man's Sky on Steam, build 184271 (the launcher checks it). Other stores
+- No Man's Sky on Steam, build 185034 (the launcher checks it). Other stores
   (GOG, Xbox / Game Pass) are not supported.
 - The game's display mode set to Borderless or Windowed (Options > Display):
   the HUD is drawn over the game and can't show over exclusive Fullscreen.

@@ -4,11 +4,11 @@ A No Man's Sky mod by **DooDooDevan**: free flight where you look, flames from b
 pose that leans with your speed, an afterburner, sonic booms, an interplanetary cruise, and flying straight into
 space, into space stations and the Space Anomaly, and under water.
 
-Version 1.0.0, for No Man's Sky build 184271 (Windows, Steam).
+Version 1.0.1, for No Man's Sky build 185034 (Windows, Steam).
 
 ## Download
 
-Get **FlyLikeIronMan_1.0.0.zip** from [Releases](../../releases); the release notes give its SHA-256 so you can check
+Get **FlyLikeIronMan_1.0.1.zip** from [Releases](../../releases); the release notes give its SHA-256 so you can check
 your download. GitHub's own "Source code" and "Download ZIP" archives hold the same files and work too.
 
 ## What's in this repository
@@ -36,7 +36,7 @@ here goes online: it talks only to the game on your own PC.
 ## Needs
 
 - Windows 10 or 11, 64-bit.
-- No Man's Sky on Steam, build 184271 (the launcher checks it). Other stores are not supported.
+- No Man's Sky on Steam, build 185034 (the launcher checks it). Other stores are not supported.
 - The game's display mode set to Borderless or Windowed (the HUD can't show over exclusive Fullscreen).
 
 ## Install and start

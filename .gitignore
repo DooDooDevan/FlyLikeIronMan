@@ -5,6 +5,7 @@ panel.json
 app/config.json
 app/*.log
 app/flight_out*.txt
+app/nmspy_out.txt
 app/limbjets_log*.txt
 app/panel_log.txt
 app/setup_log.txt

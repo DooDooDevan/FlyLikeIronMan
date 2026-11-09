@@ -115,6 +115,42 @@ def in_world():
     except Exception as e:
         _IW["err"], _IW["pm"] = f"{type(e).__name__}: {e}", None
         return False
+PAUSE_LIMIT = 75
+_PZ = {"since": None, "done": False}
+def nms_suspended():
+    try:
+        import psutil
+        for p in psutil.process_iter(["name"]):
+            if (p.info["name"] or "").lower() == "nms.exe":
+                return p if p.status() == psutil.STATUS_STOPPED else False
+    except Exception:
+        pass
+    return False
+def unstick_paused_game():
+    if _PZ["done"]:
+        return
+    p = nms_suspended()
+    if not p:
+        _PZ["since"] = None
+        return
+    if _PZ["since"] is None:
+        _PZ["since"] = time.time()
+        _setup_note("game is paused: NMS.py is loading the in-game part")
+        return
+    secs = time.time() - _PZ["since"]
+    if secs < PAUSE_LIMIT:
+        return
+    _PZ["done"] = True
+    try:
+        p.resume()
+        _setup_note(f"game still paused after {secs:.0f} s: the in-game part didn't finish loading; resumed the game")
+        print("\nThe in-game part (NMS.py) didn't finish loading, and the game was waiting for it.\n"
+              "  Resumed the game: it opens now. Flight works; the hand and foot jets may be missing.\n"
+              "  For a bug report: run Troubleshoot.bat after you quit (it includes app\\nmspy_out.txt).", flush=True)
+    except Exception as e:
+        _setup_note(f"game still paused after {secs:.0f} s; couldn't resume it ({type(e).__name__}: {e})")
+        print("\nThe game is stuck paused (NMS.py didn't finish loading) and this launcher couldn't resume it.\n"
+              "  Stop the game in Steam, then run Troubleshoot.bat and attach app\\report.txt.", flush=True)
 def _setup_note(msg):
     try:
         with open(SETUP_LOG, "a", encoding="utf-8") as f_:
@@ -260,6 +296,7 @@ def main():
             print("\nNo Man's Sky closed before a save was loaded: nothing to do. Start the launcher again to play.")
             input("Press Enter to close.")
             sys.exit(0)
+        unstick_paused_game()
         note = (f"waiting for the world: can't read the game ({_IW['err']})" if _IW["err"] else
                 f"waiting for the world: your character {'is there, checking again' if _IW['n'] else 'is not there yet'}")
         if note != last_note:
